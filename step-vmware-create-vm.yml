@@ -1,0 +1,10 @@
+---
+- name: Deploy Virtual Machine from template
+  hosts: localhost
+  roles:
+    - { role: role-include_vars }
+    - { role: role-windows-addhost-winbridge, when: farm != "bmed"  }
+    - { role: role-pretask-check, when: skipcheck == "false" }
+    - { role: role-vmware-create-vm }
+  vars: 
+    skipcheck: "false"
